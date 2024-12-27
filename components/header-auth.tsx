@@ -21,7 +21,8 @@ export default async function AuthButton() {
               variant={"default"}
               className="font-normal pointer-events-none"
             >
-              Please update .env.local file with anon key and url
+              ISSUE WITH ENVIRONMENT VARIABLES! maybe update .env.local file
+              with anon key and url
             </Badge>
           </div>
           <div className="flex gap-2">
@@ -49,10 +50,22 @@ export default async function AuthButton() {
     );
   }
   return user ? (
-    <div className="flex items-center gap-4">
-      Hey, {user.email}!
+    <div className="flex items-center gap-6">
+      {/* Navigation Buttons */}
+      <div className="flex gap-3">
+        {[
+          { href: "/group", label: "My Group" },
+          { href: "/upload", label: "Upload Receipt" },
+          { href: "/requests", label: "Grocery Requests" },
+        ].map(({ href, label }) => (
+          <Button key={href} asChild size="sm" variant="ghost">
+            <Link href={href}>{label}</Link>
+          </Button>
+        ))}
+      </div>
+      {/* Sign-Out Form */}
       <form action={signOutAction}>
-        <Button type="submit" variant={"outline"}>
+        <Button type="submit" size="sm" variant="outline">
           Sign out
         </Button>
       </form>
