@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { createClient } from "@/utils/supabase/server";
+import AvatarDropdown from "./avatar-dropdown";
 
 export default async function AuthButton() {
   const supabase = await createClient();
@@ -63,12 +64,8 @@ export default async function AuthButton() {
           </Button>
         ))}
       </div>
-      {/* Sign-Out Form */}
-      <form action={signOutAction}>
-        <Button type="submit" size="sm" variant="outline">
-          Sign out
-        </Button>
-      </form>
+      {/* Avatar form with the signout later */}
+      <AvatarDropdown />
     </div>
   ) : (
     <div className="flex gap-2">
