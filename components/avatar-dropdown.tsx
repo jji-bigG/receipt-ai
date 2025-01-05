@@ -13,6 +13,7 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { createClient } from "@/utils/supabase/client";
 import { signOutAction } from "@/app/actions";
+import Link from "next/link";
 
 export default async function AvatarDropdown() {
   // get the user from supabase
@@ -30,7 +31,9 @@ export default async function AvatarDropdown() {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem>My Account</DropdownMenuItem>
+        <Link href="/home/profile">
+          <DropdownMenuItem>My Account</DropdownMenuItem>
+        </Link>
         <DropdownMenuItem>Settings</DropdownMenuItem>
         <DropdownMenuSeparator />
         <form action={signOutAction}>

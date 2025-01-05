@@ -60,7 +60,7 @@ export default async function AuthButton() {
           { href: "/requests", label: "Grocery Requests" },
         ].map(({ href, label }) => (
           <Button key={href} asChild size="sm" variant="ghost">
-            <Link href={href}>{label}</Link>
+            <Link href={"/home" + href}>{label}</Link>
           </Button>
         ))}
       </div>
