@@ -15,6 +15,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { toast } from "react-toastify";
 
 // Zod schema for form validation
 const profileSchema = z.object({
@@ -121,7 +122,7 @@ export default function ProfileForm() {
         phone: data.phone?.trim() || null, // Ensure nullable values are handled correctly
         bio: data.bio?.trim() || null, // Ensure nullable values are handled correctly
       },
-      { onConflict: ["user_id"] } // Resolve conflict based on user_id
+      { onConflict: "user_id" } // Resolve conflict based on user_id
     );
 
     if (error) {
@@ -130,9 +131,9 @@ export default function ProfileForm() {
       return;
     }
 
-    // Redirect to the home page after successful submission
+    console.log("Profile saved successfully!");
+    toast.success("Profile saved successfully!");
     setLoading(false);
-    router.push("/home");
   };
 
   return (

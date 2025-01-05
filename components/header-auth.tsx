@@ -1,4 +1,3 @@
-import { signOutAction } from "@/app/actions";
 import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
@@ -12,6 +11,15 @@ export default async function AuthButton() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  // get the profile
+  const { data: profile, error } = await supabase
+    .from("profile")
+    .select("*")
+    .eq("user_id", user?.id)
+    .single();
+
+  console.log(error);
 
   if (!hasEnvVars) {
     return (
@@ -65,7 +73,7 @@ export default async function AuthButton() {
         ))}
       </div>
       {/* Avatar form with the signout later */}
-      <AvatarDropdown />
+      <AvatarDropdown profile={profile} />
     </div>
   ) : (
     <div className="flex gap-2">
